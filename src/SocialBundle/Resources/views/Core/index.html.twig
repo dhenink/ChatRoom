@@ -1,0 +1,64 @@
+{% extends("@Social/layout.html.twig") %}
+{% block subnavbar %}
+    <div class="col-lg-12">
+        <h1 class="text-center text-navy title-salon">Salons</h1>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+
+                <div class="ibox-content m-b-sm border-bottom">
+                    <div class="p-xs">
+                        <div class="pull-left m-r-md">
+                            <i class="fa fa-comments text-navy mid-icon"></i>
+                        </div>
+                        <h2>Bienvenue !</h2>
+                        <span>Selectionnez un salon pour discuter</span>
+                    </div>
+                </div>
+
+                <div class="ibox-content forum-container">
+
+                    <div class="forum-title">
+                        <span class="text-muted small pull-right"><a href="{{ path('salon_ajouter') }}"><button class="btn btn-sm btn-primary v-a-b"><i class="fa fa-plus"></i> Créer un salon</button></a></span>
+                        <h3>Salons ouvert: {{ salons|length }}</h3>
+                    </div>
+                    <hr>
+                    {% for salon in salons %}
+                        <div class="forum-item">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <a href="{{ path('salon_show',{'id': salon.id}) }}" class="forum-item-title">{{ salon.titre|capitalize }}</a>
+                                    <div>{{ salon.description|capitalize }}</div>
+                                </div>
+                                <div class="col-md-1 col-md-push-2 forum-info">
+                                  <span class="views-number">
+                                    {{ salon.messages|length }}
+                                  </span>
+                                    <div>
+                                        <small>Messages</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <span class="text-muted small pull-right m-t-md"><a href="{{ path('fos_user_security_logout') }}"><button class="btn btn-sm btn-danger v-a-b"><i class="fa fa-power-off"></i> Se déconnecter</button></a></span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block appendJS %}
+
+       {% javascripts
+       "@main_js"
+       "@sweet_alert"
+       %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script>
+</script>
+{% endblock %}

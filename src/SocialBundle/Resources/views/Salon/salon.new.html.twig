@@ -1,0 +1,35 @@
+{% extends("@Social/layout.html.twig") %}
+{% block subnavbar %}
+    <div class="col-lg-12">
+        <h1 class="text-center text-navy title-salon">Nouveau salon</h1>
+    </div>
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Ajout d'un nouveau salon:</h5>
+                </div>
+                <div class="ibox-content">
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="form-group">
+                                <label>{{ form_label(form.titre) }}</label>
+                                {{ form_widget(form.titre, {'attr': {'class': 'form-control'} }) }}
+                            </div>
+                            <div class="form-group">
+                                <label>{{ form_label(form.description) }}</label>
+                                {{ form_widget(form.description, {'attr': {'class': 'bloc-desc form-control'} }) }}
+                            </div>
+                            <button class="btn btn-primary m-r-md pull-right" type="submit">Valider</button>
+                            <a class="btn btn-danger m-r-sm pull-right" href="{{ path('index') }}">Retour</a>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+
+{% endblock %}

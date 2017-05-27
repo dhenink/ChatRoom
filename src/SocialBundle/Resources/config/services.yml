@@ -1,0 +1,16 @@
+services:
+    bruay.mailer:
+        class: SocialBundle\Utils\Mailer
+        arguments: ['@mailer','@router','@fos_user.util.token_generator','@templating',"@translator","@doctrine.orm.default_entity_manager"]
+
+    tools:
+        class: SocialBundle\Utils\Tools
+        arguments: []
+
+    ########### FORMS ###########
+
+    app.form.type.adresse:
+        class: SocialBundle\Form\Type\AdresseType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

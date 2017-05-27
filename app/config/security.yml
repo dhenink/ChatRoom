@@ -1,0 +1,37 @@
+security:
+    encoders:
+        SocialBundle\Entity\Compte: sha512
+
+    role_hierarchy:
+        ROLE_CORRESPONDANT: ROLE_USER
+        ROLE_ADMIN:         ROLE_CORRESPONDANT
+        ROLE_SUPER_ADMIN:   ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main_login:
+            pattern:    ^/(connexion|enregistrement|validation|reinitialisation|confirmation|login_failure)
+            anonymous: true
+
+        main:
+            pattern:   ^/
+            anonymous: false
+            provider:  fos_userbundle
+            form_login:
+                login_path: login
+                check_path: login_check
+                failure_path: login_failure
+            logout:
+                path:   fos_user_security_logout
+                target: /
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /

@@ -1,0 +1,147 @@
+{% extends("@Social/layout.html.twig") %}
+{% block subnavbar %}
+    <div class="col-lg-12">
+        <h1 class="text-center text-navy title-salon">Chat Room</h1>
+    </div>
+{% endblock %}
+{% block content %}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                <a href="{{ path('index') }}" class="btn btn-sm btn-info pull-right">Accueil</a>
+                    <div>Vous êtes dans le salon "<strong class="text-navy">{{ salon.titre|capitalize }}</strong>"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox chat-view">
+
+                <div class="ibox-title">
+                    Liste des messages:
+                </div>
+
+
+                <div class="ibox-content">
+
+                    <div class="row">
+
+                        <div class="col-md-12 ">
+                            <div class="chat-discussion" id="data-message">
+                                {% if messages|length > 0 %}
+                                {{ include('SocialBundle:Salon:salon.show.messages.html.twig') }}
+                                {% else %}
+                                    <h1 class="text-center text-danger">Pas encore de messages!</h1>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="chat-message-form">
+                                <div class="form-group">
+                                    <textarea class="form-control message-input" name="message" placeholder="Entrer votre message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="message-submit" class="message-submit m-t-sm btn btn-primary btn-block btn-sm" type="submit" disabled>Envoyer</button>
+            </div>
+        </div>
+    </div>
+</div>
+        {% endblock %}
+   {% block appendJS %}
+
+       {% javascripts
+       "@main_js"
+       "@sweet_alert"
+       %}
+       <script src="{{ asset_url }}"></script>
+       {% endjavascripts %}
+
+       <script>
+
+           $(document).ready(function(){
+
+               $('[data-toggle="tooltip"]').tooltip();
+
+            supprimerMessage();
+           });
+
+           var ajax_message = null;
+
+           $('.message-input').on('keyup',function(){
+               validerForm();
+           });
+
+           $('#message-submit').on('click',function() {
+               var salon = {{ salon.id }}
+               if (ajax_message === null) {
+                   ajax_message = $.ajax({
+                       url: Routing.generate('message_ajouter',{'id'  :salon}),
+                       type: 'POST',
+                       data: {
+                           'corps': $('.message-input').val()
+                       },
+                       success: function (results) {
+                           $('#data-message').html(results);
+                           $('.message-input').val('');
+                        supprimerMessage();
+                           ajax_message = null;
+                       }
+                   });
+               }
+           });
+
+           function validerForm(){
+               if($('.message-input').val().length >= 1){
+                   $('#message-submit').prop('disabled',false);
+               }
+               else {
+                   $('#message-submit').prop('disabled', true);
+               }
+           }
+
+           function supprimerMessage() {
+               $('.suppr-message').click(function () {
+                   var id = $(this).data('value');
+                   swal({
+                       title: "Voulez-vous supprimer ce message ?",
+                       text: "",
+                       type: "warning",
+                       showCancelButton: true,
+                       confirmButtonColor: "#DD6B55",
+                       confirmButtonText: "Confirmer",
+                       cancelButtonText: "Annuler",
+                       closeOnConfirm: false,
+                       closeOnCancel: true
+                   }, function (isConfirm) {
+                       if (isConfirm) {
+                           if(ajax_message === null){
+                               ajax_message = $.ajax({
+                                   url: Routing.generate('message_supprimer',{'id': id}),
+                                   type: 'POST',
+                                   success: function(results){
+                                       $('#data-message').html(results);
+                                       supprimerMessage();
+                                       ajax_message = null;
+
+                                   }
+                               });
+                               swal("Supprimer!", "Le message à bien été supprimer", "success");
+                           }
+
+
+                       }
+                   });
+               });
+           }
+
+       </script>
+   {% endblock %}
