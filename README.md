@@ -16,3 +16,5 @@ Puis lancez les fixtures avec la commande php bin/console doctrine:fixtures:load
 - pseudo et mot de passe du 1er: root
 - pseudo et mot de passe du 2eme: admin
 - pseudo et mot de passe du 3eme: utilisateur
+
+Pour installer assetic en version de prod lancez la commande php bin/console assetic:dump 
