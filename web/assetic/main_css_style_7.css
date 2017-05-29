@@ -6,6 +6,9 @@
  *   version 2.7
  *
 */
+body {
+    width: 100%;
+}
 h1,
 h2,
 h3,
@@ -988,6 +991,44 @@ fieldset[disabled] .btn-white.active {
 }
 .btn-form-delete {
   display: inline-block;
+}
+.btn-form {
+  text-align: right;
+}
+.bloc-description {
+  margin-top: 15px;
+  height: 60px;
+  overflow: hidden;
+}
+.v-a-b {
+  vertical-align: bottom;
+}
+.img-action {
+  height: 200px;
+  width: 100%;
+  margin-top: 10px;
+}
+.small-img-action {
+  height: 70px;
+  margin: 20px 50px;
+}
+.icon-verrou {
+  color: #ff0600;
+  font-size: 30px;
+  margin: 0 15px 10px 0;
+}
+.link-verrou,
+.link-verrou:hover,
+.link-verrou:focus {
+  margin: 10px 10px 10px 0;
+}
+.link-verrouiller,
+.link-verrouiller:hover,
+.link-verrouiller:focus,
+.link-reinit,
+.link-reinit:hover,
+.link-reinit:focus {
+  color: red;
 }
 .btn-form-new {
   margin: 20px;
@@ -3685,6 +3726,9 @@ ol.unstyled {
   position: absolute;
   right: 0;
 }
+.foot {
+    background-color: white;
+}
 .footer.fixed_full {
   position: fixed;
   bottom: 0;
@@ -4256,6 +4300,9 @@ a.close-canvas-menu:hover {
   padding-top: 70px;
 }
 /* MARGINS & PADDINGS */
+.p-b-m {
+  padding-bottom: 20px;
+}
 .p-xxs {
   padding: 5px;
 }
@@ -4272,7 +4319,7 @@ a.close-canvas-menu:hover {
   padding: 25px;
 }
 .p-lg {
-  padding: 30px;
+  padding: 30px 30px 0 30px;
 }
 .p-xl {
   padding: 40px;
@@ -4294,6 +4341,9 @@ a.close-canvas-menu:hover {
 }
 .p-w-xl {
   padding: 0 40px;
+}
+.p-h-xxs {
+  padding: 5px 0;
 }
 .p-h-xs {
   padding: 10px 0;
@@ -4692,6 +4742,12 @@ body.mini-navbar.fixed-sidebar .logo-element {
   margin: 0 auto;
   padding-top: 40px;
 }
+.middle-box-index {
+    max-width: 450px;
+    z-index: 100;
+    margin: 0 auto;
+    padding-top: 30px;
+}
 .lockscreen.middle-box {
   width: 200px;
   padding-top: 110px;
@@ -4716,8 +4772,21 @@ body.mini-navbar.fixed-sidebar .logo-element {
   letter-spacing: -10px;
   margin-bottom: 0;
 }
-.middle-box h1 {
-  font-size: 170px;
+.title-tchat {
+  font-size: 55px;
+  font-family: Georgia;
+  color: #F3F3F4;
+  text-shadow: #000000 1px 1px, #000000 -1px 1px, #000000 -1px -1px, #000000 1px -1px, 5px 5px 7px #F3F3F4;
+}
+.title-salon {
+    font-family: fantasy;
+    font-size: 50px;
+}
+body.body-bg {
+  background-color: #2F4050;
+}
+.box-connection {
+    padding-top: 110px;
 }
 .wrapper .middle-box {
   margin-top: 140px;
@@ -5482,7 +5551,48 @@ ins {
 del {
   background-color: #ffc6c6;
 }
-/* E-commerce */
+.button-enter {
+    border-radius: 50%;
+    border: 1px solid #e7eaec;
+    box-shadow: #a8a8a8 1px 1px, #a8a8a8 -1px 1px, #a8a8a8 -1px -1px, #a8a8a8 1px -1px, 5px 5px 5px #a8a8a8;
+}
+.button-enter:hover {
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 3px 7px 0 #a8a8a8;
+    -moz-box-shadow: 0 3px 7px 0 #a8a8a8;
+    box-shadow: 0 3px 7px 0 #a8a8a8;
+}
+.btn-enter {
+    font-size: 25px;
+    color: black;
+    animation: btn-enter 1s infinite;
+}
+@keyframes btn-enter{
+    0%{opacity: 1;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+}
+.bulle {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+#hover-desactive:hover,
+#hover-desactive:focus {
+    color: #ed5565;
+}
+.bloc-desc {
+  min-height: 100px;
+}
+.bandeau-active {
+  border-radius: 30px 30px 0 0;
+}
+.cercle-annuel {
+  border: 1px solid;
+  border-radius: 50%;
+}
+  /* E-commerce */
 .product-box {
   padding: 0;
   border: 1px solid #e7eaec;
@@ -5512,7 +5622,7 @@ del {
   padding: 120px 0;
 }
 .product-desc {
-  padding: 20px;
+  padding: 12px;
   position: relative;
 }
 .ecommerce .tag-list {
@@ -8505,7 +8615,7 @@ body.md-skin {
     -o-transition: background-color 500ms linear;
     -ms-transition: background-color 500ms linear;
     transition: background-color 500ms linear;
-    background-color: #f3f3f4;
+    /*background-color: #f3f3f4;*/
   }
 }
 @media (max-width: 350px) {
